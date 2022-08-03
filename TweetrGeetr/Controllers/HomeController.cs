@@ -12,9 +12,9 @@ namespace TweetrGeetr.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ITweetRepository _tweetRepository;
+        private readonly TweetRepository _tweetRepository;
 
-        public HomeController(ITweetRepository tweetRepository)
+        public HomeController(TweetRepository tweetRepository)
         {
             _tweetRepository = tweetRepository;
         }

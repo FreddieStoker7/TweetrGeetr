@@ -29,7 +29,7 @@ namespace TweetrGeetr
             services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultContext")));
 
-            services.AddScoped<ITweetRepository, TweetRepository>();
+            services.AddScoped<TweetRepository, TweetRepository>();
             services.AddControllersWithViews();
         }
 
