@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static TweetrGeetr.Models.DataFixer;
 
 namespace TweetrGeetr.Models
 {
@@ -12,9 +13,10 @@ namespace TweetrGeetr.Models
         {
 
         }
-        public DbSet<Tweet> Tweets { get; set; }
+        public DbSet<Datum> AllTweets { get; set; }
         public DbSet<BlogComment> BlogComments { get; set; }
         public DbSet<SocialMediaType> SocialMediaTypes { get; set; }
+
 
     }
 }

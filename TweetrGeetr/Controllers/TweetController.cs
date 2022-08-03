@@ -19,9 +19,9 @@ namespace TweetrGeetr.Controllers
 
    
 
-        public  ITweetRepository _tweetRepository;
+        public  TweetRepository _tweetRepository;
 
-        public TweetController(ITweetRepository tweetRepository)
+        public TweetController(TweetRepository tweetRepository)
         {
             _tweetRepository = tweetRepository; 
         }
@@ -53,17 +53,29 @@ namespace TweetrGeetr.Controllers
             
             var returnedTweets = JsonConvert.DeserializeObject<DataFixer.Root>(jsonResponse);
             var returnedArray = returnedTweets.data;
-            //List<Datum> TweetList = new List<Datum>();
+            List<Datum> TweetList = new List<Datum>();
             foreach (DataFixer.Datum tweet in returnedArray)
             {
-                _tweetRepository.AllTweetsFromApi.Add(tweet);
+                TweetList.Add(tweet);
+                
 
+                
             }
-            
+
+            _tweetRepository.AddTweetsToDb(TweetList);
+            _tweetRepository._appDbContext.SaveChanges();
 
 
+            return View(TweetList);
+        }
 
-            return View(_tweetRepository.AllTweetsFromApi);
+        public IActionResult BlogThis(string id)
+        {
+            var tweet = _tweetRepository.GetTweetById(id);
+            if (tweet == null)
+                return NotFound();
+
+            return View(tweet);
         }
         
     }

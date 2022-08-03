@@ -8,8 +8,11 @@ namespace TweetrGeetr.Models
 {
     public interface ITweetRepository
     {
-        List<Datum> AllTweetsFromApi { get; set; }
-        IEnumerable<Tweet> AllTweets { get; }
-        Tweet GetTweetById(int TweetId);
+        
+        IEnumerable<Datum> AllTweets { get; }
+        Datum GetTweetById(string TweetId);
+
+        
+
     }
 }
