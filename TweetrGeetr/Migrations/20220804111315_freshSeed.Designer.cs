@@ -10,8 +10,8 @@ using TweetrGeetr.Models;
 namespace TweetrGeetr.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220803133015_changedTablDataTypes")]
-    partial class changedTablDataTypes
+    [Migration("20220804111315_freshSeed")]
+    partial class freshSeed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,13 +23,10 @@ namespace TweetrGeetr.Migrations
 
             modelBuilder.Entity("TweetrGeetr.Models.BlogComment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("BlogEntryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BlogEntryId")
-                        .HasColumnType("int");
 
                     b.Property<string>("CommentContent")
                         .HasColumnType("nvarchar(max)");
@@ -37,7 +34,15 @@ namespace TweetrGeetr.Migrations
                     b.Property<DateTime>("DateTimePosted")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.Property<string>("Datumid")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("BlogEntryId");
+
+                    b.HasIndex("Datumid");
 
                     b.ToTable("BlogComments");
                 });
@@ -71,6 +76,13 @@ namespace TweetrGeetr.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SocialMediaTypes");
+                });
+
+            modelBuilder.Entity("TweetrGeetr.Models.BlogComment", b =>
+                {
+                    b.HasOne("TweetrGeetr.Models.DataFixer+Datum", null)
+                        .WithMany("comments")
+                        .HasForeignKey("Datumid");
                 });
 #pragma warning restore 612, 618
         }

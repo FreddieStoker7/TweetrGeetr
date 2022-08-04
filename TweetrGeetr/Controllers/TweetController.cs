@@ -21,10 +21,14 @@ namespace TweetrGeetr.Controllers
 
         public  TweetRepository _tweetRepository;
 
-        public TweetController(TweetRepository tweetRepository)
+        public CommentRepository _commentRepository;
+
+        public TweetController(TweetRepository tweetRepository, CommentRepository commentRepository)
         {
-            _tweetRepository = tweetRepository; 
+            _tweetRepository = tweetRepository;
+            _commentRepository = commentRepository;
         }
+        
 
         //public ViewResult List()
         //{
@@ -76,6 +80,24 @@ namespace TweetrGeetr.Controllers
                 return NotFound();
 
             return View(tweet);
+        }
+
+        public IActionResult Success(string id, string addedComment)
+        {
+            var newComment = new BlogComment()
+            {
+                id = id,
+                CommentContent = addedComment,
+                DateTimePosted = DateTime.Now
+            };
+
+
+            _commentRepository.AddCommentsToDb(newComment);
+            _commentRepository._appDbContext.SaveChanges();
+
+            var tweetToPass = _tweetRepository.GetTweetById(id);
+            ViewBag.tweet = tweetToPass;
+            return View(newComment);
         }
         
     }
