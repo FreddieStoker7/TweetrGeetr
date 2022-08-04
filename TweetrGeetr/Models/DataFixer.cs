@@ -12,6 +12,7 @@ namespace TweetrGeetr.Models
             public string id { get; set; }
             public string text { get; set; }
             public bool isItBlogged { get; set; } = false;
+            public List<BlogComment> comments { get; set; }
         }
 
         public class Meta

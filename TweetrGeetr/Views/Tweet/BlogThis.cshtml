@@ -12,6 +12,10 @@
         </div>
     </div>
 </div>
-<div>
-
-</div>
+<form>
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Your Comment:</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="addedComment"></textarea>
+        <button type="submit" class="btn btn-primary" asp-controller="Tweet" asp-action="Success" asp-route-id="@Model.id">Add Comment</button>
+    </div>
+</form>

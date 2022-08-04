@@ -3,23 +3,21 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TweetrGeetr.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class freshSeed : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "BlogComments",
+                name: "AllTweets",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BlogEntryId = table.Column<int>(nullable: false),
-                    CommentContent = table.Column<string>(nullable: true),
-                    DateTimePosted = table.Column<DateTime>(nullable: false)
+                    id = table.Column<string>(nullable: false),
+                    text = table.Column<string>(nullable: true),
+                    isItBlogged = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BlogComments", x => x.Id);
+                    table.PrimaryKey("PK_AllTweets", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -36,29 +34,31 @@ namespace TweetrGeetr.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tweets",
+                name: "BlogComments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    BlogEntryId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SocialMediaTypeId = table.Column<int>(nullable: true),
-                    TweetContent = table.Column<string>(nullable: true)
+                    id = table.Column<string>(nullable: true),
+                    CommentContent = table.Column<string>(nullable: true),
+                    DateTimePosted = table.Column<DateTime>(nullable: false),
+                    Datumid = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tweets", x => x.Id);
+                    table.PrimaryKey("PK_BlogComments", x => x.BlogEntryId);
                     table.ForeignKey(
-                        name: "FK_Tweets_SocialMediaTypes_SocialMediaTypeId",
-                        column: x => x.SocialMediaTypeId,
-                        principalTable: "SocialMediaTypes",
-                        principalColumn: "Id",
+                        name: "FK_BlogComments_AllTweets_Datumid",
+                        column: x => x.Datumid,
+                        principalTable: "AllTweets",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tweets_SocialMediaTypeId",
-                table: "Tweets",
-                column: "SocialMediaTypeId");
+                name: "IX_BlogComments_Datumid",
+                table: "BlogComments",
+                column: "Datumid");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -67,10 +67,10 @@ namespace TweetrGeetr.Migrations
                 name: "BlogComments");
 
             migrationBuilder.DropTable(
-                name: "Tweets");
+                name: "SocialMediaTypes");
 
             migrationBuilder.DropTable(
-                name: "SocialMediaTypes");
+                name: "AllTweets");
         }
     }
 }
