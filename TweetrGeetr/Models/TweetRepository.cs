@@ -35,6 +35,13 @@ namespace TweetrGeetr.Models
              _appDbContext.AddRange(tweetList);
         }
 
+        //public void AttachCommentsToTweet(BlogComment comment, string tweetId)
+        //{
+        //    var TweetToAddComments = GetTweetById(tweetId);
+        //    TweetToAddComments.comments.Add(comment);
+        //    _appDbContext.SaveChanges();
+        //}
+
     }
 }
 

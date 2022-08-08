@@ -22,9 +22,18 @@ namespace TweetrGeetr.Models
                 return _appDbContext.BlogComments;
             }
         }
-        public BlogComment GetCommentsByTweetId(string tweetId)
+        public List<BlogComment> GetCommentsByTweetId(string tweetId)
         {
-            return (BlogComment)BlogComments.Where(t => t.id == tweetId);
+            List<BlogComment> returnedComments = new List<BlogComment>();
+
+            foreach (BlogComment comment in BlogComments)
+            {
+                if (comment.id == tweetId)
+                {
+                    returnedComments.Add(comment);
+                }
+            }
+            return returnedComments;
         }
 
         public void AddCommentsToDb(BlogComment comment)
