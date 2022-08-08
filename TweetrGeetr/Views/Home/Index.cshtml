@@ -3,6 +3,18 @@
 
 <partial name="_SearchBar" />
 
+@foreach (var tweet in Model.Tweets)
+            {
+                <partial name="_TweetCard" model="tweet" />
+                foreach(var comment in Model.MatchingComments)
+                {
+                    if (comment.id == tweet.id)
+                    {
+                        <partial name="_CommentCard" model="comment" />
+                    }
+                }
+            }
+
 @*<div>
     @foreach (var tweet in Model.BloggedTweets)
             {
