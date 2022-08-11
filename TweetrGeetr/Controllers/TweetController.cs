@@ -83,7 +83,6 @@ namespace TweetrGeetr.Controllers
             _commentRepository._appDbContext.SaveChanges();
             var tweetToChangeStatus = _tweetRepository.GetTweetById(id);
             tweetToChangeStatus.isItBlogged = true;
-            //_tweetRepository.AttachCommentsToTweet(newComment, id);
             _tweetRepository._appDbContext.SaveChanges();
 
             var tweetToPass = _tweetRepository.GetTweetById(id);

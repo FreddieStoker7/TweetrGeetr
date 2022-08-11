@@ -45,10 +45,25 @@ namespace TweetrGeetr.Controllers
 
         public IActionResult Blogs()
         {
-            HomeViewModel homeViewModel = new HomeViewModel();
+            var bloggedTweets = _tweetRepository.AllTweets.Where(tweet => tweet.isItBlogged == true);
+            List<BlogComment> BloggedTweetsComments = new List<BlogComment>();
 
-            return View();
-            }
-        
+            foreach (Datum tweet in bloggedTweets)
+            {
+                var commentsToAdd = _commentRepository.GetCommentsByTweetId(tweet.id);
+                BloggedTweetsComments.AddRange(commentsToAdd);
+
+            };
+
+
+
+            HomeViewModel homeViewModel = new HomeViewModel();
+            homeViewModel.MatchingComments = BloggedTweetsComments;
+            homeViewModel.Tweets = bloggedTweets;
+
+            return View(homeViewModel);
+        }
+
+
     }
 }
