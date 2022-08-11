@@ -3,17 +3,33 @@
 
 <partial name="_SearchBar" />
 
-@foreach (var tweet in Model.Tweets)
-            {
-                <partial name="_TweetCard" model="tweet" />
-                foreach(var comment in Model.MatchingComments)
-                {
-                    if (comment.id == tweet.id)
-                    {
-                        <partial name="_CommentCard" model="comment" />
-                    }
-                }
-            }
+    <hr class="hr_centre my-5 w-75">
+
+<div id="mainhomepagediv" >
+    @foreach (var tweet in Model.Tweets)
+    {
+    <div id="singularTweetandComments" class="gray_bg m-5 p-3 rounded-4">
+        <partial name="_TweetCard" model="tweet" />
+
+      
+            @foreach(var comment in Model.MatchingComments)
+        {
+
+        if (comment.id == tweet.id)
+        {
+
+            <partial name="_CommentCard" model="comment" />
+
+        }
+        
+
+        }
+    </div>
+        
+    }
+</div>
+
+
 
 @*<div>
     @foreach (var tweet in Model.BloggedTweets)

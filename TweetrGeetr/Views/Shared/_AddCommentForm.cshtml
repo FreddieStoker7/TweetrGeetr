@@ -1,0 +1,17 @@
+﻿@model  TweetrGeetr.Models.BlogComment
+
+<form asp-controller="Tweet" asp-action="Success" asp-route-id="@Model.id" name="AddCommentForm">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="CommentContent">Your Comment:</label>
+        <textarea 
+                  asp-for="CommentContent" 
+                  class="form-control" 
+                  id="exampleFormControlTextarea1" 
+                  rows="3" 
+                  name="addedComment">
+        </textarea>
+        <span asp-validation-for="CommentContent"></span>
+        <button type="submit" class="btn btn-primary">Add Comment</button>
+    </div>
+</form>

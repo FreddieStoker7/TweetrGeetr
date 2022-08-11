@@ -1,10 +1,13 @@
-﻿<h1>New Blog</h1>
-<h3>Selected Tweet:</h3>
+﻿<h1 class="display-2 m-5 font-weight-bold">New Blog</h1>
+<h4 class="h1 m-5">Selected Tweet:</h4>
 <partial name="_TweetCardNoButtons" model="@Model" />
-<form>
-    <div class="form-group">
-        <label for="exampleFormControlTextarea1">Your Comment:</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="addedComment"></textarea>
-        <button type="submit" class="btn btn-primary" asp-controller="Tweet" asp-action="Success" asp-route-id="@Model.id">Add Comment</button>
-    </div>
-</form>
+<div id="add_comment_form" class="w-50 m-5">
+    <form asp-controller="Tweet" asp-action="Success" asp-route-id="@Model.id" name="AddCommentForm">
+        <div class="form-group">
+            <label for="addedComment">Your Comment:</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="addedComment" required minlength="2" maxlength="300" pattern=".*\S+.*"></textarea>
+            <button type="submit" class="btn btn-primary mt-3">Add Comment</button>
+
+        </div>
+    </form>
+</div>

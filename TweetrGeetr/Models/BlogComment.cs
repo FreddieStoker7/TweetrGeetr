@@ -11,6 +11,9 @@ namespace TweetrGeetr.Models
         public string id { get; set; }
         [Key]
         public int BlogEntryId { get; set; }
+        
+        [StringLength(300, MinimumLength = 1)]
+        [Required]
         public string CommentContent { get; set; }
         public DateTime DateTimePosted { get; set; }
 

@@ -69,6 +69,7 @@ namespace TweetrGeetr.Controllers
             _tweetRepository.AddTweetsToDb(TweetList);
             _tweetRepository._appDbContext.SaveChanges();
 
+            ViewBag.SearchQuery = searchQuery;
 
             return View(TweetList);
         }

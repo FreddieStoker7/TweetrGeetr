@@ -2,10 +2,14 @@
 
 
 
-    <h1></h1>
+
+
+<h1 class="display-2 m-5 font-weight-bold">Search Results</h1>
+<h4 class="h1 m-5">You searched for: <span class="text-primary">" @ViewBag.SearchQuery "</span></h4>
+>
     @foreach (var tweet in Model)
     {
-        <partial name="_TweetCard" model="tweet"/> 
-                
+        <partial name="_TweetCard" model="tweet" />
+
     }
 

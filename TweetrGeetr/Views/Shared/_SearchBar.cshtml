@@ -1,10 +1,17 @@
 ﻿
 
 
-<div class="my-5">
-    <h3>Enter Search Query Here</h3>
+<div class="d-flex flex-column align-items-center my-5 mx-5">
+    <h1 class="display-2 mb-5">Geetr your Tweetrs Here:</h1>
     <form>
-        <input id="txtSearchQuery" type="text" name="searchQuery" />
+        <input 
+               id="txtSearchQuery" 
+               type="text" 
+               name="searchQuery"
+               required 
+               minlength="2"
+               maxlength="20"
+               pattern=".*\S+.*" />
         <button type="submit" class="btn btn-secondary" asp-controller="Tweet" asp-action="Search">Search</button>
     </form>
 
