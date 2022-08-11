@@ -30,14 +30,7 @@ namespace TweetrGeetr.Controllers
         }
         
 
-        //public ViewResult List()
-        //{
-        //    TweetListViewModel tweetListViewModel = new TweetListViewModel();
-        //    tweetListViewModel.AllTweets = _tweetRepository.AllTweets;
-
-        //    tweetListViewModel.LatestBlogEntries = "Latest Blog Entries";
-        //    return View(tweetListViewModel);
-        //}
+        
         [HttpGet]
         public async Task<IActionResult> Search(string searchQuery)
         {
@@ -50,22 +43,15 @@ namespace TweetrGeetr.Controllers
             var response = await httpClient.GetAsync(url);
             string jsonResponse = await response.Content.ReadAsStringAsync();
 
-            
-
-            var parsedObject = JObject.Parse(jsonResponse);
-            var justDataJson = parsedObject["data"].ToString();
-            
             var returnedTweets = JsonConvert.DeserializeObject<DataFixer.Root>(jsonResponse);
-            var returnedArray = returnedTweets.data;
+            var returnedArray = returnedTweets.data ?? new List<Datum>();
             List<Datum> TweetList = new List<Datum>();
             foreach (DataFixer.Datum tweet in returnedArray)
             {
                 TweetList.Add(tweet);
-                
-
-                
+        
             }
-
+            
             _tweetRepository.AddTweetsToDb(TweetList);
             _tweetRepository._appDbContext.SaveChanges();
 
