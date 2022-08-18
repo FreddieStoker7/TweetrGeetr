@@ -24,13 +24,16 @@ namespace TweetrGeetr.Controllers
 
         public IActionResult Index()
         {
+             
             var bloggedTweets = _tweetRepository.AllTweets.Where(tweet => tweet.isItBlogged == true);
+           
+
             List<BlogComment> BloggedTweetsComments = new List<BlogComment>();
 
             foreach (Datum tweet in bloggedTweets)
             {
                 var commentsToAdd = _commentRepository.GetCommentsByTweetId(tweet.id);
-                BloggedTweetsComments.AddRange(commentsToAdd);
+                BloggedTweetsComments.AddRange(commentsToAdd); 
                 
             };
 

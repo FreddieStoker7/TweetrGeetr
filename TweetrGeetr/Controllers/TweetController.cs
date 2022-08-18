@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -34,7 +35,24 @@ namespace TweetrGeetr.Controllers
         [HttpGet]
         public async Task<IActionResult> Search(string searchQuery)
         {
-            
+            Char[] buffer;
+            var badWordsList = new List<string>();
+            using (var sr = new StreamReader("BadWords.txt"))
+            {
+                buffer = new Char[(int)sr.BaseStream.Length];
+                await sr.ReadAsync(buffer, 0, (int)sr.BaseStream.Length);
+            }
+            var consolelog = new String(buffer);
+            var splitWords = consolelog.Split("\r\n");
+
+            badWordsList.AddRange(splitWords);
+
+            if (badWordsList.Contains(searchQuery))
+            {
+                return View("~/Views/Shared/SearchExplicit.cshtml");
+            }
+
+
             var url = "https://api.twitter.com/2/tweets/search/recent?query=" + searchQuery;
             var bearerAccessToken = "AAAAAAAAAAAAAAAAAAAAAMBHfQEAAAAA2cixCv%2BDTgF6qzQKdHW8LLtidY8%3DVbflRa4zCO3gQOpsxKK2WIuwZ08tRc1KkFgYLWFCkbn9Y7Y2ez";
             var httpClient = new HttpClient();
@@ -69,12 +87,43 @@ namespace TweetrGeetr.Controllers
             return View(tweet);
         }
 
-        public IActionResult Success(string id, string addedComment)
+        public async Task<IActionResult> Success(string id, string addedComment)
         {
+
+            Char[] buffer;
+            var badWordsList = new List<string>();
+            using (var sr = new StreamReader("BadWords.txt"))
+            {
+                buffer = new Char[(int)sr.BaseStream.Length];
+                await sr.ReadAsync(buffer, 0, (int)sr.BaseStream.Length);
+            }
+            var consolelog = new String(buffer);
+            var splitWords = consolelog.Split("\r\n");
+
+            badWordsList.AddRange(splitWords);
+
+            var splitCommentList = new List<string>();
+            var splitCommentArray = addedComment.Split(" ");
+            splitCommentList.AddRange(splitCommentArray);
+            string expletiveFreeComment = "";
+
+            foreach(string word in splitCommentList)
+            {
+                if (badWordsList.Contains(word))
+                {
+
+                    expletiveFreeComment += " ****";
+                }
+                else
+                {
+                    expletiveFreeComment += " " + word;
+                }
+            }
+
             var newComment = new BlogComment()
             {
                 id = id,
-                CommentContent = addedComment,
+                CommentContent = expletiveFreeComment,
                 DateTimePosted = DateTime.Now
             };
 
