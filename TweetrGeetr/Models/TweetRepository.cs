@@ -8,22 +8,21 @@ namespace TweetrGeetr.Models
 {
     public class TweetRepository : ITweetRepository
     {
-        public AppDbContext _appDbContext; 
+        public AppDbContext _appDbContext;
 
         public TweetRepository(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
-            
+
         }
 
         public IEnumerable<Datum> AllTweets
         {
             get
             {
-                return _appDbContext.AllTweets; 
+                return _appDbContext.AllTweets;
             }
         }
-        //public List<Datum> AllTweetsFromApi { get; set; } 
 
         public Datum GetTweetById(string TweetId)
         {
@@ -32,20 +31,8 @@ namespace TweetrGeetr.Models
 
         public void AddTweetsToDb(List<Datum> tweetList)
         {
-             _appDbContext.AddRange(tweetList);
+            _appDbContext.AddRange(tweetList);
         }
-
-        //public void AttachCommentsToTweet(BlogComment comment, string tweetId)
-        //{
-        //    var TweetToAddComments = GetTweetById(tweetId);
-        //    TweetToAddComments.comments.Add(comment);
-        //    _appDbContext.SaveChanges();
-        //}
 
     }
 }
-
-//public Tweet GetTweetById(int TweetId)
-//{
-//    return _appDbContext.Tweets.FirstOrDefault(t => t.Id == TweetId);
-//}

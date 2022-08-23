@@ -6,18 +6,12 @@
         <div id="singularTweetandComments" class="gray_bg m-5 p-3 rounded-4">
             <partial name="_TweetCard" model="tweet" />
 
-
             @foreach (var comment in Model.MatchingComments)
             {
-
                 if (comment.id == tweet.id)
                 {
-
                     <partial name="_CommentCard" model="comment" />
-
                 }
-
-
             }
         </div>
 

@@ -16,6 +16,5 @@ namespace TweetrGeetr.Models
         [Required]
         public string CommentContent { get; set; }
         public DateTime DateTimePosted { get; set; }
-
     }
 }

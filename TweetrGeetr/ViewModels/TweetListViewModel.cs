@@ -11,13 +11,6 @@ namespace TweetrGeetr.ViewModels
     {
         public DataFixer dataFixer { get; set; }
         public List<Datum> AllTweetsFromApi { get; set; }
-        
         public string LatestBlogEntries { get; internal set; }
-
-        //public void Add(Datum singleTweet)
-        //{
-        //    AllTweets.Add(singleTweet);
-        //}
-        
     }
 }

@@ -24,20 +24,15 @@ namespace TweetrGeetr.Controllers
 
         public IActionResult Index()
         {
-             
             var bloggedTweets = _tweetRepository.AllTweets.Where(tweet => tweet.isItBlogged == true);
-           
-
+         
             List<BlogComment> BloggedTweetsComments = new List<BlogComment>();
 
             foreach (Datum tweet in bloggedTweets)
             {
                 var commentsToAdd = _commentRepository.GetCommentsByTweetId(tweet.id);
                 BloggedTweetsComments.AddRange(commentsToAdd); 
-                
             };
-
-
 
             HomeViewModel homeViewModel = new HomeViewModel();
             homeViewModel.MatchingComments = BloggedTweetsComments;
@@ -55,10 +50,7 @@ namespace TweetrGeetr.Controllers
             {
                 var commentsToAdd = _commentRepository.GetCommentsByTweetId(tweet.id);
                 BloggedTweetsComments.AddRange(commentsToAdd);
-
             };
-
-
 
             HomeViewModel homeViewModel = new HomeViewModel();
             homeViewModel.MatchingComments = BloggedTweetsComments;
@@ -66,7 +58,5 @@ namespace TweetrGeetr.Controllers
 
             return View(homeViewModel);
         }
-
-
     }
 }

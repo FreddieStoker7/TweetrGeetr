@@ -1,13 +1,9 @@
 ﻿
-
 <partial name="_TweetCardNoButtons" model="@ViewBag.tweet" />
-
-
 
 <h2 class=" h2 m-5 text-success"> Success!</h2>
 
-    <partial name="_CommentCardStart" model="@Model" />
-   
-    <a asp-controller="home" asp-action="index">
-        <button type="button" class="m-5 btn btn-outline-secondary btn-lg px-4">Go Home</button>
-    </a>
+<partial name="_CommentCardStart" model="@Model" />
+<a asp-controller="home" asp-action="index">
+    <button type="button" class="m-5 btn btn-outline-secondary btn-lg px-4">Go Home</button>
+</a>

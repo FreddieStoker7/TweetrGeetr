@@ -8,11 +8,8 @@ namespace TweetrGeetr.Models
 {
     public interface ITweetRepository
     {
-        
         IEnumerable<Datum> AllTweets { get; }
         Datum GetTweetById(string TweetId);
-
-        
 
     }
 }
